@@ -38,6 +38,7 @@ export default function Index() {
               <Text style={styles.buttonText}>English</Text>
               </LinearGradient>
               </MaskedView>
+              
              
             </Pressable>
           </LinearGradient>
@@ -66,7 +67,7 @@ export default function Index() {
         </View>
       </View>
       
-      <View style={styles.bottomContainer}>
+      {/* <View style={styles.bottomContainer}>
       <LinearGradient
             colors={["#ff5e3a", "#ff2a00"]} 
             style={styles.gradientBorderContinue}
@@ -83,7 +84,7 @@ export default function Index() {
               </MaskedView>
             </View>
           </LinearGradient>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 100
+   
   },
   bottomContainer: {
     width: "90%",
