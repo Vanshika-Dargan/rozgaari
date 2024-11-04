@@ -1,43 +1,88 @@
 import React, { useState } from "react";
-import { Text, View, Pressable, StyleSheet } from "react-native";
+import { Text, View, Pressable, StyleSheet, Image } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
 
 export default function Index() {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
-  const [progress, setProgress] = useState(0.1); 
+  const [progress, setProgress] = useState(0.1);
 
   return (
     <View style={styles.container}>
       {/* Progress Bar */}
-      <View style={styles.progressContainer}>
+      {/* <View style={styles.progressContainer}>
         <View style={[styles.progressBar, { width: `${progress * 100}%` }]} />
-      </View>
-      <View style={styles.lang}>
-      <Text style={styles.title}>Select Language</Text>
-      
-      <View style={styles.buttonContainer}>
-        <Pressable
-          style={[styles.button, selectedLanguage === "en" ? styles.buttonSelected : styles.buttonDefault]}
-          onPress={() => {
-            setSelectedLanguage("en");
-            setProgress(0.2); 
-          }}
-        >
-          <Text style={styles.buttonText}>English</Text>
-        </Pressable>
+      </View> */}
 
-        <Pressable
-          style={[styles.button, selectedLanguage === "hi" ? styles.buttonSelected : styles.buttonDefault]}
-          onPress={() => {
-            setSelectedLanguage("hi");
-            setProgress(0.2); // Update progress when Hindi is selected
-          }}
-        >
-          <Text style={styles.buttonText}>Hindi</Text>
-        </Pressable>
+      
+      <View style={styles.lang}>
+        <Text style={styles.title}>{selectedLanguage==="en" ? "Select Language" : "भाषा चुनें"}</Text>
+
+        <View style={styles.buttonContainer}>
+          <LinearGradient
+            colors={["#32a89f", "#1b6b8a"]}
+            style={styles.gradientBorder}
+          >
+            <Pressable
+              style={[
+                styles.button,
+                selectedLanguage === "en" && styles.buttonSelected,
+              ]}
+              onPress={() => {
+                setSelectedLanguage("en");
+                setProgress(0.2);
+              }}
+            >
+              <MaskedView maskElement={<Text style={styles.buttonTextGradient}>English</Text>}>
+              <LinearGradient  colors={["#32a89f", "#1b6b8a"]}>
+              <Text style={styles.buttonText}>English</Text>
+              </LinearGradient>
+              </MaskedView>
+             
+            </Pressable>
+          </LinearGradient>
+
+          <LinearGradient
+            colors={["#32a89f", "#1b6b8a"]}
+            style={styles.gradientBorder}
+          >
+            <Pressable
+              style={[
+                styles.button,
+                selectedLanguage === "hi" && styles.buttonSelected,
+              ]}
+              onPress={() => {
+                setSelectedLanguage("hi");
+                setProgress(0.2);
+              }}
+            >
+             <MaskedView maskElement={<Text style={styles.buttonTextGradient}>हिंदी</Text>}>
+              <LinearGradient  colors={["#32a89f", "#1b6b8a"]}>
+              <Text style={styles.buttonText}>हिंदी</Text>
+              </LinearGradient>
+              </MaskedView>
+            </Pressable>
+          </LinearGradient>
+        </View>
       </View>
-      </View>
+      
       <View style={styles.bottomContainer}>
-        <Text  style={styles.bottomBtn}>Continue</Text>
+      <LinearGradient
+            colors={["#ff5e3a", "#ff2a00"]} 
+            style={styles.gradientBorderContinue}
+          >
+            <View
+              style={[
+                styles.continue
+              ]}
+            >
+             <MaskedView maskElement={<Text style={styles.buttonTextGradient}>&gt;</Text>}>
+              <LinearGradient  colors={["#ff5e3a", "#ff2a00"]} >
+              <Text style={styles.buttonText}>&gt;</Text>
+              </LinearGradient>
+              </MaskedView>
+            </View>
+          </LinearGradient>
       </View>
     </View>
   );
@@ -47,94 +92,95 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "black", // Black background color
   },
   progressContainer: {
-    marginTop:80,
+    marginTop: 80,
     height: 10,
-    width: "80%", // Adjust width as needed
-    backgroundColor: "#e0e0e0", // Background color of the progress bar
+    width: "80%",
+    backgroundColor: "#e0e0e0",
     borderRadius: 5,
     overflow: "hidden",
-    marginBottom: 20, // Space between progress bar and title
+    marginBottom: 20,
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "#4f83cc", // Color of the progress bar
+    backgroundColor: "#4f83cc",
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 20,
+    color: "white",
+    marginBottom: 50,
   },
   buttonContainer: {
     flexDirection: "column",
     width: "80%",
     justifyContent: "center",
-    alignItems: "center", // Center buttons horizontally
+    alignItems: "center",
+    rowGap: 10
+   
+  },
+  gradientBorder: {
+    padding: 3, // Border thickness
+    borderRadius: 10,
+    margin: 5,
+    width: "100%"
+  },
+  gradientBorderContinue: {
+    padding: 3, // Border thickness
+    borderRadius: 30,
+    margin: 5,
   },
   button: {
-    fontSize: 24,
-    paddingVertical: 20,
     width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    paddingVertical: 20,
     paddingHorizontal: 30,
-    margin: 5,
-    borderRadius: 80,
-    backgroundColor: "#d3d3d3",
+    borderRadius: 10,
+    backgroundColor: "black", 
+    alignItems: "center",
+    color: "white",
   },
-  buttonDefault: {
-    backgroundColor: "#d3d3d3",
+  continue: {
+    height: 40, 
+    width: 40, 
+    borderRadius: 20, 
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center", 
   },
-  buttonSelected: {
-    backgroundColor: "#4f83cc",
+  
+  buttonSelected: { 
+    backgroundColor: "#30363e"
   },
   buttonText: {
-    color: "white",
+    opacity: 0,
     fontWeight: "bold",
     fontSize: 18,
   },
-  selectedLanguageText: {
-    fontSize: 18,
-    marginTop: 20,
-  },
-  continueButton: {
-    marginTop: 20,
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 50,
-    backgroundColor: "#4f83cc", // Background color for the continue button
-    alignItems: "center",
-    justifyContent: "center",
-    width: "80%", // Adjust width as needed
-  },
-  continueButtonText: {
-    color: "white",
-    fontSize: 18,
+  buttonTextGradient: {
+    backgroundColor: "transparent",
     fontWeight: "bold",
+    fontSize: 18,
   },
   lang: {
     flex: 1,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 100
   },
   bottomContainer: {
-    width: "80%",
+    width: "90%",
     paddingVertical: 15,
     marginBottom: 30,
-    borderTopWidth: 2,
-    borderTopColor: "#d3d3d3",
     justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 20,
-    borderWidth: 2, 
-    borderColor: "#d3d3d3", // Make sure the color is set as well
-    backgroundColor: "white", // Optional: to see the border clearly against the background
+    alignItems: "flex-end",
   },
   bottomBtn: {
     fontSize: 18,
-   
   },
+  map:{
+   
+  }
 });
