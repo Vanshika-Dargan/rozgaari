@@ -2,8 +2,13 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
-
+import { useRouter } from 'expo-router';
 const PhoneNumberInput = () => {
+  const router = useRouter();
+
+  const handleNavigateToAuth = () => {
+    router.push('/otp'); // Navigate to the auth screen
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.bottomBox}>
@@ -26,13 +31,18 @@ const PhoneNumberInput = () => {
             />
           </View>
           <View style={styles.bottomContainer}>
-            <LinearGradient
-              colors={["#ff5e3a", "#ff2a00"]}
-              style={[styles.gradientFilledButton]}
-            >
-              <Text style={styles.buttonText}>Continue</Text>
-            </LinearGradient>
-          </View>
+      <Pressable onPress={handleNavigateToAuth} style={({ pressed }) => [
+      
+        { opacity: pressed ? 0.7 : 1 } // Optional: change opacity on press
+      ]}>
+        <LinearGradient
+          colors={["#ff5e3a", "#ff2a00"]}
+          style={styles.gradientFilledButton}
+        >
+          <Text style={styles.buttonText}>Continue</Text>
+        </LinearGradient>
+      </Pressable>
+    </View>
           <View style={styles.tncContainer}>
             <Text style={styles.heading3}>
               By continuing you agree to Rozgaari 
@@ -52,7 +62,7 @@ const PhoneNumberInput = () => {
 const styles = StyleSheet.create({
   container2: {
     flexDirection: 'row',
-    columnGap: 8
+    columnGap: 8,
   },
   heading3: {},
   tnc: {
@@ -92,6 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+     backgroundColor: '#F5F5F7'
   },
   container: {
     justifyContent: 'center',
@@ -104,7 +115,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'blue',
     paddingHorizontal: 10,
     paddingVertical: 15,

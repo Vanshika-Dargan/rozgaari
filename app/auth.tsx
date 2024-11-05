@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Pressable, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { useRouter } from "expo-router";
 
 export default function Index() {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -14,6 +15,7 @@ export default function Index() {
     setSelectedLanguage("hi");
     setProgress(0.2);
   };
+
   return (
     <View style={styles.container}>
       {/* Progress Bar */}
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white", // Black background color
+    backgroundColor: "#EEEEEE", // Black background color
   },
   progressContainer: {
     marginTop: 80,
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     width: 250-2,
     height: 50-2,
     borderRadius: 10,
-    backgroundColor: "white", 
+    backgroundColor: "#EEEEEE", 
     alignItems: "center",
     justifyContent: "center",
     color: "white",
