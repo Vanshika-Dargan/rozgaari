@@ -6,7 +6,14 @@ import MaskedView from "@react-native-masked-view/masked-view";
 export default function Index() {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [progress, setProgress] = useState(0.1);
-
+  const handlePress = () => {
+    setSelectedLanguage("en");
+    setProgress(0.2);
+  };
+  const handlePressHn = () => {
+    setSelectedLanguage("hi");
+    setProgress(0.2);
+  };
   return (
     <View style={styles.container}>
       {/* Progress Bar */}
@@ -19,51 +26,59 @@ export default function Index() {
         <Text style={styles.title}>{selectedLanguage==="en" ? "Select Language" : "भाषा चुनें"}</Text>
 
         <View style={styles.buttonContainer}>
-          <LinearGradient
-            colors={["#32a89f", "#1b6b8a"]}
-            style={styles.gradientBorder}
-          >
-            <Pressable
-              style={[
-                styles.button,
-                selectedLanguage === "en" && styles.buttonSelected,
-              ]}
-              onPress={() => {
-                setSelectedLanguage("en");
-                setProgress(0.2);
-              }}
-            >
-              <MaskedView maskElement={<Text style={styles.buttonTextGradient}>English</Text>}>
-              <LinearGradient  colors={["#32a89f", "#1b6b8a"]}>
-              <Text style={styles.buttonText}>English</Text>
-              </LinearGradient>
-              </MaskedView>
-              
-             
-            </Pressable>
-          </LinearGradient>
+        {selectedLanguage === 'en' ? (
+  <Pressable onPress={handlePress}>
+    <LinearGradient
+      colors={["#ff5e3a", "#ff2a00"]}
+      style={styles.gradientFilledButton}
+    >
+      <Text style={styles.buttonText2}>English</Text>
+    </LinearGradient>
+  </Pressable>
+) : (
+  <LinearGradient
+  colors={["#ff5e3a", "#ff2a00"]}
+    style={styles.gradientBorder}
+  >
+    <Pressable
+      style={styles.button}
+      onPress={handlePress}
+    >
+      <MaskedView maskElement={<Text style={styles.buttonTextGradient}>English</Text>}>
+        <LinearGradient colors={["#ff5e3a", "#ff2a00"]}>
+          <Text style={styles.buttonText}>English</Text>
+        </LinearGradient>
+      </MaskedView>
+    </Pressable>
+  </LinearGradient>
+)}
 
-          <LinearGradient
-            colors={["#32a89f", "#1b6b8a"]}
-            style={styles.gradientBorder}
-          >
-            <Pressable
-              style={[
-                styles.button,
-                selectedLanguage === "hi" && styles.buttonSelected,
-              ]}
-              onPress={() => {
-                setSelectedLanguage("hi");
-                setProgress(0.2);
-              }}
-            >
-             <MaskedView maskElement={<Text style={styles.buttonTextGradient}>हिंदी</Text>}>
-              <LinearGradient  colors={["#32a89f", "#1b6b8a"]}>
-              <Text style={styles.buttonText}>हिंदी</Text>
-              </LinearGradient>
-              </MaskedView>
-            </Pressable>
-          </LinearGradient>
+{selectedLanguage === 'hi' ? (
+  <Pressable onPress={handlePressHn}>
+    <LinearGradient
+      colors={["#ff5e3a", "#ff2a00"]}
+      style={styles.gradientFilledButton}
+    >
+      <Text style={styles.buttonText2}>Hindi</Text>
+    </LinearGradient>
+  </Pressable>
+) : (
+  <LinearGradient
+  colors={["#ff5e3a", "#ff2a00"]}
+    style={styles.gradientBorder}
+  >
+    <Pressable
+      style={styles.button}
+      onPress={handlePressHn}
+    >
+      <MaskedView maskElement={<Text style={styles.buttonTextGradient}>Hindi</Text>}>
+        <LinearGradient colors={["#ff5e3a", "#ff2a00"]}>
+          <Text style={styles.buttonText}>Hindi</Text>
+        </LinearGradient>
+      </MaskedView>
+    </Pressable>
+  </LinearGradient>
+)}
         </View>
       </View>
       
@@ -93,7 +108,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "black", // Black background color
+    backgroundColor: "white", // Black background color
   },
   progressContainer: {
     marginTop: 80,
@@ -108,10 +123,24 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#4f83cc",
   },
+  gradientFilledButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: "white",
+    paddingHorizontal: 10,
+  },
+  buttonText2: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
-    color: "white",
+    color: "black",
     marginBottom: 50,
   },
   buttonContainer: {
@@ -119,37 +148,26 @@ const styles = StyleSheet.create({
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
-    rowGap: 10
+    rowGap: 20
    
   },
   gradientBorder: {
-    padding: 3, // Border thickness
     borderRadius: 10,
-    margin: 5,
-    width: "100%"
+    padding: 1,
   },
-  gradientBorderContinue: {
-    padding: 3, // Border thickness
-    borderRadius: 30,
-    margin: 5,
-  },
+  
   button: {
-    width: "100%",
-    paddingVertical: 20,
-    paddingHorizontal: 30,
+    width: 250-2,
+    height: 50-2,
     borderRadius: 10,
-    backgroundColor: "black", 
+    backgroundColor: "white", 
     alignItems: "center",
+    justifyContent: "center",
     color: "white",
+    paddingHorizontal: 10,
+    
   },
-  continue: {
-    height: 40, 
-    width: 40, 
-    borderRadius: 20, 
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center", 
-  },
+
   
   buttonSelected: { 
     backgroundColor: "#30363e"
