@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43162315529",
+    "project_id": "rozgaari-eefee",
+    "storage_bucket": "rozgaari-eefee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43162315529:android:d548af7325e2f1852841d8",
+        "android_client_info": {
+          "package_name": "com.dragonnn.rozgaari"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyBeo6HB_8CSPbTJ491gyj-e4kYgu_i9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
